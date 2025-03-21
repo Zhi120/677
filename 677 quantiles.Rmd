@@ -1,0 +1,26 @@
+---
+title: "677 nerue data"
+author: "Zihao Zhang"
+date: "2025-03-21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+url<-"https://www.stat.cmu.edu/~larry/all-of-statistics/=data/nerve.dat"
+data<-read.delim(url,header = FALSE)
+```
+
+```{r}
+quantiles_list <- lapply(data, function(column) {
+  quantile(column, probs = c(0.25, 0.5, 0.75), na.rm = TRUE)
+})
+
+# Convert the list to a data frame
+quantiles_df <- as.data.frame(do.call(cbind, quantiles_list))
+quantiles_df
+```
+
